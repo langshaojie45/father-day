@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>给爸爸的祝福</title>
     <meta name="description" content="一封写给爸爸的父亲节祝福信。" />
+    <meta property="og:title" content="给爸爸的祝福" />
+    <meta property="og:description" content="有些感谢，今天想认真说给爸爸听。" />
+    <meta property="og:image" content="assets/father-day-hero.png" />
     <style>
       :root {
         color-scheme: light;
@@ -45,6 +48,60 @@
         padding: 28px 0 34px;
       }
 
+      .reveal {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(90deg, rgba(255, 250, 242, 0.96), rgba(255, 250, 242, 0.78)),
+          url("assets/father-day-hero.png") center / cover no-repeat;
+        padding: 24px;
+        transition: opacity 420ms ease, visibility 420ms ease;
+      }
+
+      .reveal.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .envelope {
+        width: min(560px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.84);
+        box-shadow: var(--shadow);
+        padding: clamp(28px, 6vw, 48px);
+        text-align: center;
+        backdrop-filter: blur(16px);
+      }
+
+      .stamp {
+        display: inline-grid;
+        width: 58px;
+        height: 58px;
+        place-items: center;
+        border: 1px solid rgba(213, 137, 50, 0.36);
+        border-radius: 8px;
+        color: var(--gold);
+        font-size: 1.6rem;
+        font-weight: 900;
+      }
+
+      .envelope h1 {
+        margin: 22px 0 12px;
+        font-size: clamp(2rem, 6vw, 3.8rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .envelope p {
+        margin: 0 auto 26px;
+        width: min(420px, 100%);
+        color: #40505a;
+      }
+
       .topbar {
         display: flex;
         align-items: center;
@@ -74,6 +131,12 @@
         backdrop-filter: blur(10px);
       }
 
+      .button.primary {
+        border-color: transparent;
+        background: var(--ink);
+        color: white;
+      }
+
       .intro {
         margin: 18px 0 28px;
       }
@@ -90,6 +153,23 @@
         margin: 20px 0 0;
         color: #34424a;
         font-size: clamp(1.02rem, 2.4vw, 1.25rem);
+      }
+
+      .promise-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 22px 0 0;
+      }
+
+      .promise-line span {
+        border: 1px solid rgba(23, 32, 38, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.62);
+        color: var(--blue);
+        padding: 7px 12px;
+        font-size: 0.94rem;
+        font-weight: 700;
       }
 
       .message-panel {
@@ -301,6 +381,15 @@
     </style>
   </head>
   <body>
+    <section class="reveal" id="reveal" aria-label="打开祝福">
+      <div class="envelope">
+        <div class="stamp">爸</div>
+        <h1>有一封祝福，想给你。</h1>
+        <p>那些平时没说出口的感谢，今天慢慢说给爸爸听。</p>
+        <button class="button primary" type="button" id="openBlessing">拆开祝福</button>
+      </div>
+    </section>
+
     <div class="page">
       <header class="topbar">
         <div class="brand">2026 父亲节快乐</div>
@@ -310,6 +399,11 @@
       <section class="intro" aria-label="祝福开场">
         <h1>这份祝福，送给爸爸。</h1>
         <p>有些爱不常挂在嘴边，却一直稳稳地托着我们。今天，想认真说一句：爸爸，谢谢你。</p>
+        <div class="promise-line" aria-label="祝福关键词">
+          <span>愿你自在</span>
+          <span>愿你健康</span>
+          <span>愿你被爱</span>
+        </div>
       </section>
 
       <main>
@@ -379,6 +473,8 @@
 
     <script>
       const toast = document.querySelector("#toast");
+      const reveal = document.querySelector("#reveal");
+      const openBlessing = document.querySelector("#openBlessing");
       const nameInput = document.querySelector("#fromName");
       const nameButton = document.querySelector("#nameButton");
       const signature = document.querySelector("#signature");
@@ -399,6 +495,10 @@
       nameButton.addEventListener("click", updateName);
       nameInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") updateName();
+      });
+
+      openBlessing.addEventListener("click", () => {
+        reveal.classList.add("hidden");
       });
     </script>
   </body>

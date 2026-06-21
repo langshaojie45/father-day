@@ -8,6 +8,9 @@
       name="description"
       content="一份温暖的父亲节线上祝福，献给一直默默守护我们的爸爸。"
     />
+    <meta property="og:title" content="父亲节快乐" />
+    <meta property="og:description" content="把这份父亲节祝福送给爸爸。" />
+    <meta property="og:image" content="assets/father-day-hero.png" />
     <style>
       :root {
         color-scheme: light;
@@ -79,6 +82,18 @@
 
       .hero-copy {
         width: min(620px, 100%);
+      }
+
+      .hero-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 28px;
+        border-left: 3px solid var(--gold);
+        background: rgba(255, 255, 255, 0.54);
+        color: #40505a;
+        padding: 10px 14px;
+        backdrop-filter: blur(10px);
       }
 
       .eyebrow {
@@ -392,6 +407,7 @@
             <a class="button primary" href="blessing.html">打开祝福</a>
             <button class="button secondary" type="button" id="shareButton">分享这份心意</button>
           </div>
+          <div class="hero-note">下一页是一封单独写给爸爸的祝福信。</div>
         </div>
       </div>
     </section>
@@ -402,9 +418,6 @@
     <script>
       const shareButton = document.querySelector("#shareButton");
       const toast = document.querySelector("#toast");
-      const nameInput = document.querySelector("#fromName");
-      const nameButton = document.querySelector("#nameButton");
-      const signature = document.querySelector("#signature");
 
       const showToast = (message) => {
         toast.textContent = message;
@@ -412,17 +425,6 @@
         window.clearTimeout(showToast.timer);
         showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2400);
       };
-
-      const updateName = () => {
-        const name = nameInput.value.trim();
-        signature.textContent = name ? `${name} 敬上` : "爱你的孩子";
-        showToast(name ? "署名已更新" : "已恢复默认署名");
-      };
-
-      nameButton.addEventListener("click", updateName);
-      nameInput.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") updateName();
-      });
 
       shareButton.addEventListener("click", async () => {
         const shareData = {
